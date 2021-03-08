@@ -62,7 +62,7 @@ function onKlikk() {
         document.getElementById("inputitem").value = "";
         document.getElementById("inputamount").value = "";
     }
-    else if(inputitem=="" || inputamount==""){
+    else if(inputitem.replaceAll(" ","")=="" || inputamount.replaceAll(" ","")==""){
         alert('Nincs megadva tétel vagy mennyiség');
     }
     else{
