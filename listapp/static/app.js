@@ -1,7 +1,7 @@
 function onKlikk() {
     if (document.getElementById("inputitem").value != "" && document.getElementById("inputamount").value != "") {
         var osszes = document.getElementById("inputitem").value + "" + document.getElementById("inputamount").value;
-        var result = osszes.replaceAll(" ", "").toLowerCase();
+        var result = osszes.replaceAll(" ", "").replaceAll("<","").replaceAll(">","").replaceAll("{","").replaceAll("}","").toLowerCase();
         var count = document.getElementById("itemek").rows.length;
         for (var i = 1; i < count; ++i) {
             var item = document.getElementById("itemek").rows[i]["cells"][1].innerHTML + document.getElementById("itemek").rows[i]["cells"][2].innerHTML;
@@ -68,7 +68,7 @@ function confirmgomb() {
     for (var i = 1; i < count; ++i) {
         if (document.getElementById("itemek").rows[i]["cells"][0].firstElementChild.checked == true) {
             var value = document.getElementById("itemek").rows[i]["cells"][1].innerHTML + document.getElementById("itemek").rows[i]["cells"][2].innerHTML;
-            var result = value.replaceAll(" ", "").toLowerCase();
+            var result = osszes.replaceAll(" ", "").replaceAll("<","").replaceAll(">","").replaceAll("{","").replaceAll("}","").toLowerCase();
             document.getElementById("itemek").deleteRow(i);
             count = count - 1;
             i = i - 1;
