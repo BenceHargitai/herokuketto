@@ -1,7 +1,10 @@
 function onKlikk() {
-    if (document.getElementById("inputitem").value != "" && document.getElementById("inputamount").value != "") {
+    var inputitem= document.getElementById("inputitem").value;
+    var inputamount = document.getElementById("inputamount").value;
+    if (inputitem != "" &&  inputamount != "" && ugyeskedsz(inputamount)==false && ugyeskedsz(inputitem)==false) {
+        
         var osszes = document.getElementById("inputitem").value + "" + document.getElementById("inputamount").value;
-        var result = osszes.replaceAll(" ", "").replaceAll("<","").replaceAll(">","").replaceAll("{","").replaceAll("}","").toLowerCase();
+        var result = osszes.replaceAll(" ", "").replaceAll("<","").toLowerCase();
         var count = document.getElementById("itemek").rows.length;
         for (var i = 1; i < count; ++i) {
             var item = document.getElementById("itemek").rows[i]["cells"][1].innerHTML + document.getElementById("itemek").rows[i]["cells"][2].innerHTML;
@@ -28,8 +31,8 @@ function onKlikk() {
 
 
         const json = {
-            "nev": inputitem.value,
-            "mennyiseg": inputamount.value,
+            "nev": inputitem,
+            "mennyiseg": inputamount,
             "id": result
         }
         const csrftoken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
@@ -56,19 +59,30 @@ function onKlikk() {
                 }
             })
         console.log(json);
+        document.getElementById("inputitem").value = "";
+        document.getElementById("inputamount").value = "";
     }
-    document.getElementById("inputitem").value = "";
-    document.getElementById("inputamount").value = "";
-
-
+    else if(inputitem=="" || inputamount==""){
+        alert('Nincs megadva tétel vagy mennyiség');
+    }
+    else{
+        alert('Te nekem itt ne ügyeskedjél')
+    }
+}
+function ugyeskedsz(string){
+    if (string.includes('<') || string.includes('>') ||string.includes('{') || string.includes('}') || string.includes('[') || string.includes(']') || string.includes('\\') || string.includes('//'))
+        return true;
+    else
+        return false;
 
 }
+
 function confirmgomb() {
     var count = document.getElementById("itemek").rows.length;
     for (var i = 1; i < count; ++i) {
         if (document.getElementById("itemek").rows[i]["cells"][0].firstElementChild.checked == true) {
             var value = document.getElementById("itemek").rows[i]["cells"][1].innerHTML + document.getElementById("itemek").rows[i]["cells"][2].innerHTML;
-            var result = osszes.replaceAll(" ", "").replaceAll("<","").replaceAll(">","").replaceAll("{","").replaceAll("}","").toLowerCase();
+            var result = value.replaceAll(" ", "").toLowerCase();
             document.getElementById("itemek").deleteRow(i);
             count = count - 1;
             i = i - 1;
