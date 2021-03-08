@@ -1,7 +1,7 @@
 function onKlikk() {
     var inputitem= document.getElementById("inputitem").value;
     var inputamount = document.getElementById("inputamount").value;
-    if (inputitem != "" &&  inputamount != "" && ugyeskedsz(inputamount)==false && ugyeskedsz(inputitem)==false) {
+    if (inputitem.replaceAll(" ","") != "" &&  inputamount.replaceAll(" ","") != "" && ugyeskedsz(inputamount)==false && ugyeskedsz(inputitem)==false) {
         
         var osszes = document.getElementById("inputitem").value + "" + document.getElementById("inputamount").value;
         var result = osszes.replaceAll(" ", "").replaceAll("<","").toLowerCase();
